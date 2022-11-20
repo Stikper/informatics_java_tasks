@@ -15,8 +15,11 @@ public class Main {
         int k = in.nextInt() - 1;
         int m = in.nextInt() - 1;
         int r = in.nextInt();
-        //Циклический сдвиг влево
-        fromToLeftShift(array,k,m,r);
+        //Циклический сдвиг влево на такую величину, что он аналогичен сдвигу вправо :)
+        //А именно -- длинна сдвигаемого отрезка (колво элементов) = (toIndex - fromIndex + 1)
+        // - величина сдвига вправо те r (на всякий берем остаток от деления на длинну)
+        // А если серьезно, то это тоже магия
+        fromToLeftShift(array,k,m,(m - k + 1) - r % (m - k + 1));
         for(int i : array) {
             System.out.print(i + " ");
         }
@@ -33,7 +36,7 @@ public class Main {
         //Делаем как нас учили на уроке :)
         amount = amount % (toIndex - fromIndex + 1);
         if(amount == 0) {
-            return 0; //Костыль, чтоб не сдвигать если сдвиг приводит к тому же ( там просто ниче не работает если 0 :) )
+            return 1; //Костыль, чтоб не сдвигать если сдвиг приводит к тому же ( там просто ниче не работает если 0 :) )
         }
         fromToReverse(array,fromIndex, fromIndex + amount - 1); //Магия
         fromToReverse(array,fromIndex + amount, toIndex); //Магия
