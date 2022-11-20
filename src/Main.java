@@ -14,10 +14,11 @@ public class Main {
         //Запись k и m и преобразование их в индекс
         int k = in.nextInt() - 1;
         int m = in.nextInt() - 1;
-        //Реверс массива от 0 до середины и от середины до n-1
-        fromToReverse(array, k, m);
+        int r = in.nextInt();
+        //Циклический сдвиг влево
+        fromToLeftShift(array,k,m,r);
         for(int i : array) {
-            System.out.print(i +" ");
+            System.out.print(i + " ");
         }
     }
     public static void fromToReverse(int[] array, int fromIndex, int toIndex) {
@@ -27,5 +28,16 @@ public class Main {
             array[i] = array[fromIndex + (toIndex - i)]; //Приравниваем ячейку массива в i к противоположной в области реверсирования
             array[fromIndex + (toIndex - i)] = tmp; //Приравниваем противоположную ячейку к временной перменной
         }
+    }
+    public static int fromToLeftShift(int[] array, int fromIndex, int toIndex, int amount) {
+        //Делаем как нас учили на уроке :)
+        amount = amount % (toIndex - fromIndex + 1);
+        if(amount == 0) {
+            return 0; //Костыль, чтоб не сдвигать если сдвиг приводит к тому же ( там просто ниче не работает если 0 :) )
+        }
+        fromToReverse(array,fromIndex, fromIndex + amount - 1); //Магия
+        fromToReverse(array,fromIndex + amount, toIndex); //Магия
+        fromToReverse(array,fromIndex,toIndex);
+        return 0;
     }
 }
