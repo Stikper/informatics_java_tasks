@@ -6,19 +6,33 @@ public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
-        if(n >= 2) {
-            int[] array = new int[n];
-            array[0] = 1;
-            array[1] = 1;
-            for (int i = 2; i < n; i++) {
-                array[i] = array[i - 1] + array[i - 2];
-            }
-            for (int i = 0; i < n; i++) {
-                System.out.println(array[i] + " ");
-            }
-        } else if (n == 1) {
-            System.out.println(1);
+        int[] array = new int[n];
+        //Заполнение массива вводимыми числами
+        for(int i = 0; i < n; i++) {
+            array[i] = in.nextInt();
+        }
+        //Реверс массива от 0 до середины и от середины до n-1
+        fromToReverse(array, 0, (n-1)/2);
+        fromToReverse(array, (n-1)/2+1, n-1);
+        //Вывод массива через пробел
+        /*
+        for(int i = 0; i <array.length; i++) {
+            System.out.println(array[i]);
+        }
+        */
+        //Конструкция ниже аналогична закоментированной конструкции выше
+        for (int j : array) {
+            System.out.println(j);
         }
         in.close();
+    }
+    //Реверс массива от fromIndex до toIndex
+    public static void fromToReverse(int[] array, int fromIndex, int toIndex) {
+        int tmp;
+        for(int i = fromIndex; i <= fromIndex + (toIndex - fromIndex) / 2; i++) {
+            tmp = array[i]; //Записываем значение ячейки массива индекса i во временную перменную
+            array[i] = array[fromIndex + (toIndex - i)]; //Приравниваем ячейку массива в i к противоположной в области реверсирования
+            array[fromIndex + (toIndex - i)] = tmp; //Приравниваем противоположную ячейку к временной перменной
+        }
     }
 }
