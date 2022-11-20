@@ -8,25 +8,18 @@ public class Main {
         int n = in.nextInt();
         int[] array = new int[n];
         //Заполнение массива вводимыми числами
-        for(int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             array[i] = in.nextInt();
         }
+        //Запись k и m и преобразование их в индекс
+        int k = in.nextInt() - 1;
+        int m = in.nextInt() - 1;
         //Реверс массива от 0 до середины и от середины до n-1
-        fromToReverse(array, 0, (n-1)/2);
-        fromToReverse(array, (n-1)/2+1, n-1);
-        //Вывод массива через пробел
-        /*
-        for(int i = 0; i <array.length; i++) {
-            System.out.println(array[i]);
+        fromToReverse(array, k, m);
+        for(int i : array) {
+            System.out.print(i +" ");
         }
-        */
-        //Конструкция ниже аналогична закоментированной конструкции выше
-        for (int j : array) {
-            System.out.println(j);
-        }
-        in.close();
     }
-    //Реверс массива от fromIndex до toIndex
     public static void fromToReverse(int[] array, int fromIndex, int toIndex) {
         int tmp;
         for(int i = fromIndex; i <= fromIndex + (toIndex - fromIndex) / 2; i++) {
