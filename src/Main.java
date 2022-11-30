@@ -12,7 +12,17 @@ public class Main {
             array[i] = in.nextInt();
         }
 
-        BubbleSort(array);
+        // Какой-то подозрительный намек на сортировку вставками
+        for (int i = 0; i < 3; i++) {
+            int num_min = i;
+            for (int j = i; j < array.length; j++) {
+                if (array[num_min] > array[j]) {
+                    num_min = j;
+                }
+            }
+            //Мы нашли минимум и ставим его первым сдвигом вправо от i до этого минимума
+            fromToRightShift(array, i, num_min, 1);
+        }
 
         //Вывод массива
         for (int now : array) {
@@ -50,4 +60,28 @@ public class Main {
         }
     }
 
+    // Украденные функции с предыдущего ДЗ
+    public static void fromToReverse(int[] array, int fromIndex, int toIndex) {
+        int tmp;
+        for(int i = fromIndex; i <= fromIndex + (toIndex - fromIndex) / 2; i++) {
+            tmp = array[i]; //Записываем значение ячейки массива индекса i во временную перменную
+            array[i] = array[fromIndex + (toIndex - i)]; //Приравниваем ячейку массива в i к противоположной в области реверсирования
+            array[fromIndex + (toIndex - i)] = tmp; //Приравниваем противоположную ячейку к временной перменной
+        }
+    }
+
+    public static void fromToRightShift(int[] array, int fromIndex, int toIndex, int amount) {
+        fromToLeftShift(array,fromIndex,toIndex,(toIndex - fromIndex + 1) - amount % (toIndex - fromIndex + 1));
+    }
+
+    public static void fromToLeftShift(int[] array, int fromIndex, int toIndex, int amount) {
+        //Делаем как нас учили на уроке :)
+        amount = amount % (toIndex - fromIndex + 1);
+        if(amount == 0) {
+            return; //Костыль, чтоб не сдвигать если сдвиг приводит к тому же ( там просто ниче не работает если 0 :) )
+        }
+        fromToReverse(array,fromIndex, fromIndex + amount - 1); //Магия
+        fromToReverse(array,fromIndex + amount, toIndex); //Магия
+        fromToReverse(array,fromIndex,toIndex);
+    }
 }
