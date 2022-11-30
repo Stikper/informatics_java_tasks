@@ -12,28 +12,25 @@ public class Main {
             array[i] = in.nextInt();
         }
 
-        // Какой-то подозрительный намек на сортировку вставками
-        for (int i = 0; i < 3; i++) {
-            int num_min = i;
-            for (int j = i; j < array.length; j++) {
-                if (array[num_min] > array[j]) {
-                    num_min = j;
-                }
-            }
-            //Мы нашли минимум и ставим его первым сдвигом вправо от i до этого минимума
-            fromToRightShift(array, i, num_min, 1);
-        }
+        BubbleSort(array);
+        int counter = 0;
+        int prenumber = array[0] - 1; // Шаманство, чтобы при первом проходе каунтер стал 1 :)
 
         //Вывод массива
         for (int now : array) {
             System.out.print(now + " ");
+            if(prenumber != now) {
+                prenumber = now;
+                counter++;
+            }
         }
+        System.out.print("\n" + counter);
     }
 
 
     //Функция сравнения (возвращает true если первый аргумент превосходит второй, иначе возвращает false)
     public static boolean cmp(int a, int b) {
-        return a % 10 > b % 10; // Сравнение последних чисел
+        return a > b; //Сравнение чисел
     }
 
     //Функция меняющая два элемента массива (шоб меньше писать в функции сортировки :) )
