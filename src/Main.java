@@ -3,6 +3,8 @@ import java.util.Scanner;
 import static java.lang.Math.*;
 
 public class Main {
+    public static boolean flag = false;
+    public static boolean kostil = false; //Выводили ли мы ваще хоть че то блеять
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
@@ -13,25 +15,17 @@ public class Main {
         }
 
         BubbleSort(array);
-
-        //Вывод отсортированного массива
-        for (int now : array) {
-            System.out.print(now + " ");
+        if(!kostil) {
+            for(int now : array) {
+                System.out.print(now + " ");
             }
+            System.out.println();
         }
+    }
 
     //Функция сравнения (возвращает true если первый аргумент превосходит второй, иначе возвращает false)
     public static boolean cmp(int a, int b) {
-            int sum1 = 0, sum2 = 0;
-            while (a > 0) {
-                sum1 += a % 10;
-                a /= 10;
-            }
-            while (b > 0) {
-                sum2 += b % 10;
-                b /= 10;
-            }
-            return sum1 < sum2; // Сравнение по сумме цифр
+            return a > b;
     }
 
     //Функция меняющая два элемента массива (шоб меньше писать в функции сортировки :) )
@@ -47,13 +41,24 @@ public class Main {
         // Буль буль буль буль буль
         for (int i = 0; i + 1 < array.length; i++) {
             // Буль буль буль буль буль
-            for (int j = 0; j + 1 < array.length - i; j++) {
+            for (int j = array.length - 1; j > i; j--) {
                 // Буль буль буль буль буль
-                if(cmp(array[j], array[j + 1])) {
+                if(cmp(array[j - 1], array[j])) {
                     // Буль буль буль буль буль
-                    swap(array, j, j + 1);
+                    flag = true;
+                    swap(array, j, j - 1);
                     // Буль буль буль буль буль
                 }
+            }
+            if(flag) {
+                for(int now : array) {
+                    System.out.print(now + " ");
+                }
+                System.out.println();
+                flag = false;
+                kostil = true;
+            } else {
+                return;
             }
         }
     }
