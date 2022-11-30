@@ -3,7 +3,6 @@ import java.util.Scanner;
 import static java.lang.Math.*;
 
 public class Main {
-    public static boolean kostil = false; // Производилась ли сортировка (или он уже был отсортирован)
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
@@ -13,12 +12,26 @@ public class Main {
             array[i] = in.nextInt();
         }
 
-        BubbleSort(array); // Добавляем в функцию вывод каждого шага
-        if(!kostil) {
-            System.out.println(0);
-        }
-    }
+        BubbleSort(array);
+        int max = -1;
+        boolean found = false;
+        int prenumber = array[0] - 1;
+        //Проверка условия задачи
+        for (int now : array) {
+            if(prenumber == now) {
+                if(!found) {
+                    max = now;
+                    found = true;
+                }
+                if(now > max) {
+                    max = now;
+                }
+            }
+            prenumber = now;
+            }
 
+        System.out.println(max);
+        }
 
     //Функция сравнения (возвращает true если первый аргумент превосходит второй, иначе возвращает false)
     public static boolean cmp(int a, int b) {
@@ -43,18 +56,9 @@ public class Main {
                 if(cmp(array[j], array[j + 1])) {
                     // Буль буль буль буль буль
                     swap(array, j, j + 1);
-                    PrintArray(array);
-                    System.out.println();
-                    kostil = true;
                     // Буль буль буль буль буль
                 }
             }
-        }
-    }
-
-    public static void PrintArray(int[] array) {
-        for(int now : array) {
-            System.out.print(now + " ");
         }
     }
 
