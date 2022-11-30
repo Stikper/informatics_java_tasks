@@ -3,8 +3,6 @@ import java.util.Scanner;
 import static java.lang.Math.*;
 
 public class Main {
-    public static boolean flag = false;
-    public static boolean kostil = false; //Выводили ли мы ваще хоть че то блеять
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
@@ -14,12 +12,11 @@ public class Main {
             array[i] = in.nextInt();
         }
 
-        BubbleSort(array);
-        if(!kostil) {
-            for(int now : array) {
-                System.out.print(now + " ");
-            }
-            System.out.println();
+        BubbleSort(array, 0, n / 2 - 1);
+        BubbleSort(array, n / 2, n - 1);
+        fromToReverse(array, n / 2, n - 1);
+        for(int now : array) {
+            System.out.print(now + " ");
         }
     }
 
@@ -37,28 +34,17 @@ public class Main {
     }
 
     //Сортировка пузыриком ебать
-    public static void BubbleSort(int[] array) {
+    public static void BubbleSort(int[] array, int fromIndex, int toIndex) {
         // Буль буль буль буль буль
-        for (int i = 0; i + 1 < array.length; i++) {
+        for (int i = 0; i + 1 < toIndex - fromIndex + 1; i++) {
             // Буль буль буль буль буль
-            for (int j = array.length - 1; j > i; j--) {
+            for (int j = toIndex; j > fromIndex + i; j--) {
                 // Буль буль буль буль буль
                 if(cmp(array[j - 1], array[j])) {
                     // Буль буль буль буль буль
-                    flag = true;
                     swap(array, j, j - 1);
                     // Буль буль буль буль буль
                 }
-            }
-            if(flag) {
-                for(int now : array) {
-                    System.out.print(now + " ");
-                }
-                System.out.println();
-                flag = false;
-                kostil = true;
-            } else {
-                return;
             }
         }
     }
