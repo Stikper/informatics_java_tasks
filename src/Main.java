@@ -11,16 +11,8 @@ public class Main {
         for (int i = 0; i < n; i++) {
             array[i] = in.nextInt();
         }
-        int k = in.nextInt() - 1;
-        int m = in.nextInt() - 1;
-        int d = in.nextInt();
-        BubbleSort(array, k, m);
-        if(d == -1) {
-            fromToReverse(array, k, m);
-        }
-        for(int now : array) {
-            System.out.print(now + " ");
-        }
+        BubbleSort(array, 0, n - 1);
+        System.out.println(array[n / 2]);
     }
 
     //Функция сравнения (возвращает true если первый аргумент превосходит второй, иначе возвращает false)
