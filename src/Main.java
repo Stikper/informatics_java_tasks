@@ -5,32 +5,49 @@ import static java.lang.Math.*;
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        int a = in.nextInt();
-        int b = in.nextInt();
         int n = in.nextInt();
-        int k = in.nextInt();
-        int counter = 0;
         int[] array = new int[n];
-        //Заполнение массива рандомными числами от a до b
+        // Чтение массива
         for (int i = 0; i < n; i++) {
-            array[i] = (int) (random() * (b - a + 1)) + a;
+            array[i] = in.nextInt();
         }
-        for(int i : array) {
-            //Вывод i-ого элемента массива
-            System.out.print(i + " ");
-            //Подсчет суммы i-ого элемента массива
-            int sum = 0;
-            while(i != 0) {
-                sum += i % 10;
-                i /= 10;
-            }
-            //Сравнение суммы i-ого элемента c заданной суммой
-            if(k == sum) {
-                counter++;
+
+        BubbleSort(array);
+
+        //Вывод массива
+        for (int now : array) {
+            System.out.print(now + " ");
+        }
+    }
+
+
+    //Функция сравнения (возвращает true если первый аргумент превосходит второй, иначе возвращает false)
+    public static boolean cmp(int a, int b) {
+        return a % 10 > b % 10; // Сравнение последних чисел
+    }
+
+    //Функция меняющая два элемента массива (шоб меньше писать в функции сортировки :) )
+    //Э - Эфективность
+    public static void swap(int[] array, int a, int b) {
+        int tmp = array[a];
+        array[a] = array[b];
+        array[b] = tmp;
+    }
+
+    //Сортировка пузыриком ебать
+    public static void BubbleSort(int[] array) {
+        // Буль буль буль буль буль
+        for (int i = 0; i + 1 < array.length; i++) {
+            // Буль буль буль буль буль
+            for (int j = 0; j + 1 < array.length - i; j++) {
+                // Буль буль буль буль буль
+                if(cmp(array[j], array[j + 1])) {
+                    // Буль буль буль буль буль
+                    swap(array, j, j + 1);
+                    // Буль буль буль буль буль
+                }
             }
         }
-        System.out.println();
-        System.out.print(counter);
     }
 
 }
