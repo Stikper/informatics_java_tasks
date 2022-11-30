@@ -13,29 +13,25 @@ public class Main {
         }
 
         BubbleSort(array);
-        int max = -1;
-        boolean found = false;
-        int prenumber = array[0] - 1;
-        //Проверка условия задачи
-        for (int now : array) {
-            if(prenumber == now) {
-                if(!found) {
-                    max = now;
-                    found = true;
-                }
-                if(now > max) {
-                    max = now;
-                }
-            }
-            prenumber = now;
-            }
 
-        System.out.println(max);
+        //Вывод отсортированного массива
+        for (int now : array) {
+            System.out.print(now + " ");
+            }
         }
 
     //Функция сравнения (возвращает true если первый аргумент превосходит второй, иначе возвращает false)
     public static boolean cmp(int a, int b) {
-        return a > b; //Сравнение чисел
+            int sum1 = 0, sum2 = 0;
+            while (a > 0) {
+                sum1 += a % 10;
+                a /= 10;
+            }
+            while (b > 0) {
+                sum2 += b % 10;
+                b /= 10;
+            }
+            return sum1 < sum2; // Сравнение по сумме цифр
     }
 
     //Функция меняющая два элемента массива (шоб меньше писать в функции сортировки :) )
