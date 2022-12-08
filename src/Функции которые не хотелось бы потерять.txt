@@ -26,6 +26,23 @@
             }
         }
     }
+    //Сортировка выбором ебать
+        public static void SelectionSort(int[] array) {
+            int n = array.length;
+            for (int i = 0; i < n - 1; i++) {
+                //Выборы выборы
+                int num_min = i;
+                for (int j = i; j < n; j++) {
+                    //Кандидиаты пидоры
+                    if (array[j] < array[num_min]) {
+                        num_min = j;
+                    }
+                }
+                if (array[i] != array[num_min]) {
+                    swap(array, i, num_min);
+                }
+            }
+        }
     // Украденные функции с предыдущего ДЗ
     public static void fromToReverse(int[] array, int fromIndex, int toIndex) {
         int tmp;
