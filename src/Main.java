@@ -13,11 +13,12 @@ public class Main {
         }
         //Сортировка
         SelectionSort(array, 0);
+        SelectionSort(array, 1);
         // Вывод
         for (int now : array) {
             System.out.print(now + " ");
         }
-     }
+    }
     //Функция сравнения (возвращает true если первый аргумент превосходит второй, иначе возвращает false)
     public static boolean cmp(int a, int b) {
         return a > b;
@@ -37,7 +38,7 @@ public class Main {
             int num_min = i;
             for (int j = i; j < n; j += 2) {
                 //Кандидиаты пидоры
-                if (array[j] < array[num_min]) {
+                if (odd == 0 && array[j] < array[num_min] || odd == 1 && array[j] > array[num_min]) {
                     num_min = j;
                 }
             }
