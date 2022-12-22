@@ -7,24 +7,25 @@ public class Main {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
         int m = in.nextInt();
-        int counter = 0;
+        int min = Integer.MAX_VALUE;
+        int imin = 0;
         int[][] matrix = new int[n][m];
         //Чтение
         for (int i = 0; i < n; i++) {
+            int sum = 0;
             for (int j = 0; j < m; j++) {
                 matrix[i][j] = in.nextInt();
+                sum += matrix[i][j];
+            }
+            if (sum < min) {
+                min = sum;
+                imin = i;
             }
         }
-        int k = in.nextInt();
-        //Проерка условия
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (matrix[i][j] == k) {
-                    counter++;
-                }
-            }
+        //Вывод
+        for (int j = 0; j < m; j++) {
+            System.out.print(matrix[imin][j] + " ");
         }
-        System.out.println(counter);
         in.close();
     }
 }
