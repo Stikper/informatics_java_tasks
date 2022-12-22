@@ -16,18 +16,10 @@ public class Main {
             }
         }
         int k = in.nextInt();
-        int r = in.nextInt();
         //Проерка условия
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                int sign_counter = 0;
-                int sum = 0;
-                while (matrix[i][j] > 0) {
-                    sum += matrix[i][j] % 10;
-                    matrix[i][j] /= 10;
-                    sign_counter++;
-                }
-                if (sign_counter == k && sum % r == 0) {
+                if (matrix[i][j] == k) {
                     counter++;
                 }
             }
