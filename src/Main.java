@@ -7,13 +7,32 @@ public class Main {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
         int m = in.nextInt();
-        int sum = 0;
+        int counter = 0;
+        int[][] matrix = new int[n][m];
+        //Чтение
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                sum += in.nextInt();
+                matrix[i][j] = in.nextInt();
             }
         }
-        System.out.println(sum);
+        int k = in.nextInt();
+        int r = in.nextInt();
+        //Проерка условия
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                int sign_counter = 0;
+                int sum = 0;
+                while (matrix[i][j] > 0) {
+                    sum += matrix[i][j] % 10;
+                    matrix[i][j] /= 10;
+                    sign_counter++;
+                }
+                if (sign_counter == k && sum % r == 0) {
+                    counter++;
+                }
+            }
+        }
+        System.out.println(counter);
         in.close();
     }
 }
